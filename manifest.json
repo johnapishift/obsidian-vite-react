@@ -1,0 +1,11 @@
+{
+	"id": "sample-plugin",
+	"name": "Sample Plugin",
+	"version": "0.0.1",
+	"minAppVersion": "0.0.1",
+	"description": "Sample react vite plugin",
+	"author": "Author",
+	"authorUrl": "https://obsidian.md",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}
