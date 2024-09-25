@@ -4,8 +4,8 @@ import solidPlugin from "vite-plugin-solid";
 import builtins from "builtin-modules";
 import path from "path";
 import * as fsp from "fs/promises";
-import wasm from "vite-plugin-wasm";
-import topLevelAwait from "vite-plugin-top-level-await";
+// import wasm from "vite-plugin-wasm";
+// import topLevelAwait from "vite-plugin-top-level-await";
 
 const banner = `
 /*!
@@ -20,8 +20,8 @@ export default defineConfig(async ({ mode }) => {
   return {
     plugins: [
       solidPlugin(),
-      wasm(),
-      topLevelAwait(),
+    //   wasm(),
+    //   topLevelAwait(),
       viteStaticCopy({
         targets: [
           {
