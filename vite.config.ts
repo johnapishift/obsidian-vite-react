@@ -1,10 +1,11 @@
-import { exec } from "child_process";
 import { defineConfig, loadEnv, Plugin, UserConfig } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import solidPlugin from "vite-plugin-solid";
 import builtins from "builtin-modules";
 import path from "path";
 import * as fsp from "fs/promises";
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 const banner = `
 /*!
@@ -14,24 +15,13 @@ if you want to view the source, please visit the github repository https://githu
 `;
 
 export default defineConfig(async ({ mode }) => {
-  const { normalize } = path;
-  const { rm } = fsp;
   const prod = mode === "production";
 
-  let { OUT_DIR } = loadEnv(mode, process.cwd(), ["OUT_"]);
-//   if (OUT_DIR != "dist" && OUT_DIR != path.join(process.cwd(), "dist")) {
-//     await rm("dist", { recursive: true });
-//     exec(
-//       process.platform === "win32"
-//         ? `mklink /J dist ${OUT_DIR}`
-//         : `ln -s ${OUT_DIR} dist`
-//     );
-//   }
-
-  console.log("sdomyhl")
   return {
     plugins: [
       solidPlugin(),
+      wasm(),
+      topLevelAwait(),
       viteStaticCopy({
         targets: [
           {
@@ -45,7 +35,6 @@ export default defineConfig(async ({ mode }) => {
         ".tex": "binary",
         ".sty": "binary",
       }), // src/resources.ts
-      prod ? undefined : inject(["src/hmr.ts"]),
     ],
     build: {
       lib: {
